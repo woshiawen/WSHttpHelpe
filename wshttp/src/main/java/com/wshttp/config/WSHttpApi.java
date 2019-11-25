@@ -2,6 +2,7 @@ package com.wshttp.config;
 
 
 
+
 import android.util.ArrayMap;
 
 import java.util.List;
@@ -9,12 +10,12 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -27,26 +28,16 @@ import rx.Observable;
 public interface WSHttpApi {
 
     @GET
-    Observable<Object> get(@Url String url, @QueryMap  ArrayMap<String, String>  arrayMap);
-
+    Observable<Object> get(@Url String url, @QueryMap ArrayMap<String,String> arrayMap);
 
 
 
     @FormUrlEncoded
-    @POST /**("http://118.24.65.174:8080/TaskPlatformWeb/servlet/GetGulidBanner")**/
+    @POST
     Observable<Object> post(
             @Url String url,
             @FieldMap ArrayMap<String,String> fieldMap
     );
-
-
-    @FormUrlEncoded
-    @POST("http://118.24.65.174:8080/TaskPlatformWeb/servlet/GetGulidBanner")
-    Observable<Object> getHomeBanner(
-            @Url String url,
-            @Field("version") String version);
-
-
 
 
     @POST

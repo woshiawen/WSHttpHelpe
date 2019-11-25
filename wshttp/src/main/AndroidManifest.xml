@@ -4,12 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application>
-        <activity
-            android:name=".TestActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_test"
-            android:theme="@style/FullscreenTheme"></activity>
-    </application>
+
 
 </manifest>

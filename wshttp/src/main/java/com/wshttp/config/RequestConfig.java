@@ -15,7 +15,7 @@ import okhttp3.Response;
 /**
  * 请求配置参数
  */
-public   class RequestConfig {
+public abstract   class RequestConfig {
 
     //连接超时时间
     public static final long DEFAULT_CONNECT_TIME_OUT = 1000 * 5;
@@ -27,7 +27,7 @@ public   class RequestConfig {
     //单个连接读取超时时间
     public static final long DEFAULT_READ_TIME_OUT = 1000 * 10;
     //默认的BaseUrl
-    public static  String DEFAULT_BASE_URL = "http://118.24.65.174:8080/TaskPlatformWeb/servlet/";
+    public static  String DEFAULT_BASE_URL = "";
 
     public RequestConfig(String url) {
         DEFAULT_BASE_URL = url;
@@ -95,8 +95,6 @@ public   class RequestConfig {
     }
 
 
-    public String onHttpBaseUrl() {
-        return DEFAULT_BASE_URL;
-    }
+    public abstract String onHttpBaseUrl();
 
 }
