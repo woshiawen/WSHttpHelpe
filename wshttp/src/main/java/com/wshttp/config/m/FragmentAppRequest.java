@@ -1,12 +1,11 @@
 package com.wshttp.config.m;
 
+import com.trello.rxlifecycle3.LifecycleTransformer;
 import com.wshttp.base.WsFragmentApp;
-
-import rx.Observable;
 
 public class FragmentAppRequest extends BaseRequest {
     @Override
-    public <T> Observable.Transformer<T, T> getLifecycle(Object context) {
+    public <T> LifecycleTransformer<Object> getLifecycle(Object context) {
 
         if (context instanceof WsFragmentApp){
             return  ((WsFragmentApp) context).bindToLifecycle();

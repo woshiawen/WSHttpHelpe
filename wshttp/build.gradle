@@ -31,7 +31,7 @@ dependencies {
     // Retrofit库
     implementation 'com.squareup.retrofit2:converter-gson:2.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.0.2'
-    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     // Okhttp库
     implementation 'com.squareup.okhttp3:okhttp:3.14.1'
 
@@ -40,8 +40,10 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
 
     //这两个是 RxAppCompatActivity 里面的
-    implementation 'com.trello:rxlifecycle:0.4.0'
-    implementation 'com.trello:rxlifecycle-components:0.4.0'
+    implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
+    implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
+    implementation 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:3.1.0'
+    implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
 
     implementation 'com.parkingwang:okhttp3-loginterceptor:latest.integration'
     implementation 'org.jetbrains:annotations:15.0'

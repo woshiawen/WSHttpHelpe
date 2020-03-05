@@ -4,7 +4,7 @@ import com.wshttp.config.RequestConfig;
 
 public class HttpConfig extends RequestConfig {
 
-  public static final String BASE_URL ="http://118.24.65.174:8080/TaskPlatformWeb/servlet/";
+  public static final String BASE_URL ="http://180.76.144.228:8080/QuanBaoLM/";
 
   @Override
   public String onHttpBaseUrl() {

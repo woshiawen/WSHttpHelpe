@@ -1,6 +1,6 @@
 package com.wshttp.config.m;
 
-import rx.Observable;
+import com.trello.rxlifecycle3.LifecycleTransformer;
 
 public abstract class BaseRequest {
 
@@ -14,6 +14,6 @@ public abstract class BaseRequest {
         this.baseRequest = baseRequest;
     }
 
-    public abstract <T> Observable.Transformer<T, T> getLifecycle(Object context);
+    public abstract <T> LifecycleTransformer<Object> getLifecycle(Object context);
 
 }

@@ -33,7 +33,7 @@ public class MainActivity extends WSActivity {
     ArrayMap params = new ArrayMap();
     params.put("version", "1.0");
     WSClientHelper.get(
-        "GetGulidBanner",
+        "GetBannerList",
         params,
         BannerEntity.class,
         this,
