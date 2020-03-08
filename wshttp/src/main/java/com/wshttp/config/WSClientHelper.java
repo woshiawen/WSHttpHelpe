@@ -33,6 +33,11 @@ public class WSClientHelper {
     private static FragmentAppRequest fragmentAppRequest;
 
 
+    /**
+     * 责任链模式实现
+     * @param activity
+     * @return
+     */
     public static LifecycleTransformer<Object> getLifecycle(Object activity) {
         if (activityRequest == null || fragmentV4Request == null || fragmentAppRequest == null) {
             activityRequest = new ActivityRequest();
