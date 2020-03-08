@@ -66,7 +66,7 @@ public class WSHttpClient {
         .readTimeout(requestConfig.onReadTimeOutNum(), TimeUnit.MILLISECONDS)
         .addInterceptor(requestConfig.onInterceptor())
 //        .addNetworkInterceptor(requestConfig.onNetWorkInterceptor())
-//        .cookieJar(requestConfig.onCookieJar())
+        .cookieJar(requestConfig.onCookieJar())
          .proxy(Proxy.NO_PROXY)
 //        .cache(requestConfig.onCache())
         .build();
