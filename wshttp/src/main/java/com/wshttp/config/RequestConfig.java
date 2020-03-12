@@ -11,8 +11,10 @@ import java.util.Map;
 import okhttp3.Cache;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
+import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -82,28 +84,44 @@ public abstract class RequestConfig {
     }
 
 
-
-    private final Map<String, List<Cookie>> cookiesMap = new HashMap<String, List<Cookie>>();
+    /**
+     * 重写此方法定义CookieJar
+     * @return
+     */
     public CookieJar onCookieJar() {
-        return new CookieJar() {
-            @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                String host = url.host();
-                List<Cookie> cookiesList = cookiesMap.get(host);
-                if (cookiesList != null) {
-                    cookiesMap.remove(host);
-                }
-                //再重新添加
-                cookiesMap.put(host, cookies);
-            }
+        return new WSCookieJar();
+    }
 
+    /**
+     * 添加请求头信息的拦截器
+     * @return
+     */
+    public  Interceptor onTokenInterceptor(){
+        return new Interceptor() {
             @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
-                List<Cookie> cookiesList = cookiesMap.get(url.host());
-                return cookiesList != null ? cookiesList : new ArrayList<Cookie>();
+            public Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+                Request request = original.newBuilder()
+                        .headers(getHeaders())
+                        .method(original.method(), original.body())
+                        .build();
+                return chain.proceed(request);
             }
         };
     }
+
+
+    /**
+     * 重写此方法自定义请求头
+     *
+     * @return
+     */
+    public Headers getHeaders(){
+        return new Headers.Builder().add("xToken","xxxxxxxx").build();
+    }
+
+
     public abstract String onHttpBaseUrl();
+
 
 }
