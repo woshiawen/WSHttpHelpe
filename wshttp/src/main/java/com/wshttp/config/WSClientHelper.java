@@ -69,7 +69,15 @@ public class WSClientHelper {
                         }
                     }
 
-                });
+                }
+                        ,
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                callBack.onFail(throwable.getLocalizedMessage());
+                            }
+                        }
+                );
 
 
     }
@@ -81,17 +89,24 @@ public class WSClientHelper {
                 .compose(getLifecycle(activity))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer() {
-                    @Override
-                    public void accept(Object json) throws Exception {
-                        try {
-                            T temp = FormatUtil.getFormatUtil().formatJson(json, t);
-                            callBack.onSuccess(temp);
+                               @Override
+                               public void accept(Object json) throws Exception {
+                                   try {
+                                       T temp = FormatUtil.getFormatUtil().formatJson(json, t);
+                                       callBack.onSuccess(temp);
 
-                        } catch (Exception e) {
-                            callBack.onFail(e.getLocalizedMessage());
+                                   } catch (Exception e) {
+                                       callBack.onFail(e.getLocalizedMessage());
+                                   }
+                               }
+                           } ,
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                callBack.onFail(throwable.getLocalizedMessage());
+                            }
                         }
-                    }
-                });
+                );
     }
 
 
@@ -115,7 +130,13 @@ public class WSClientHelper {
                     }
                 }
 
-                        );
+                        ,
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                callBack.onFail(throwable.getLocalizedMessage());
+                            }
+                        }   );
     }
 
     /**
@@ -144,7 +165,13 @@ public class WSClientHelper {
                             callBack.onFail(e.getLocalizedMessage());
                         }
                     }
-                });
+                },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                callBack.onFail(throwable.getLocalizedMessage());
+                            }
+                        });
     }
 
 
@@ -169,7 +196,13 @@ public class WSClientHelper {
                             }
                         }
                     }
-                });
+                },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                callBack.onFail(throwable.getLocalizedMessage());
+                            }
+                        });
     }
 
 
