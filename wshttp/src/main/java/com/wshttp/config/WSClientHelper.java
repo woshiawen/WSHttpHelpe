@@ -104,10 +104,18 @@ public class WSClientHelper {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object json) throws Exception {
-                        T temp = FormatUtil.getFormatUtil().formatJson(json, t);
-                        callBack.onSuccess(temp);
+                        try {
+                            T temp = FormatUtil.getFormatUtil().formatJson(json, t);
+                            callBack.onSuccess(temp);
+
+                        } catch (Exception e) {
+                            callBack.onFail(e.getLocalizedMessage());
+                        }
+
                     }
-                });
+                }
+
+                        );
     }
 
     /**
@@ -128,8 +136,13 @@ public class WSClientHelper {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object json) throws Exception {
-                        T temp = FormatUtil.getFormatUtil().formatJson(json, t);
-                        callBack.onSuccess(temp);
+                        try {
+                            T temp = FormatUtil.getFormatUtil().formatJson(json, t);
+                            callBack.onSuccess(temp);
+
+                        } catch (Exception e) {
+                            callBack.onFail(e.getLocalizedMessage());
+                        }
                     }
                 });
     }
@@ -144,7 +157,6 @@ public class WSClientHelper {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        Log.e(TAG, "----------------o instanceof ResponseBody---------" + (o instanceof ResponseBody));
                         if (o instanceof ResponseBody) {
                             try {
                                 String string = ((ResponseBody) o).string();
