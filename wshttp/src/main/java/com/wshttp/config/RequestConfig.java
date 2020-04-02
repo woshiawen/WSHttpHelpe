@@ -25,12 +25,12 @@ public abstract class RequestConfig {
     //连接超时时间
     public static final long DEFAULT_CONNECT_TIME_OUT = 1000 * 5;
     //单个IO写入超时时间
-    public static final long DEFAULT_WRITE_TIME_OUT = 1000 * 10;
+    public static final long DEFAULT_WRITE_TIME_OUT = 1000 * 60;
     //调用超时时间
-    public static final long DEFAULT_CALL_TIME_OUT = 1000 * 10;
+    public static final long DEFAULT_CALL_TIME_OUT = 1000 * 60;
 
     //单个连接读取超时时间
-    public static final long DEFAULT_READ_TIME_OUT = 1000 * 10;
+    public static final long DEFAULT_READ_TIME_OUT = 1000 * 60;
     //默认的BaseUrl
     public static String DEFAULT_BASE_URL = "";
 

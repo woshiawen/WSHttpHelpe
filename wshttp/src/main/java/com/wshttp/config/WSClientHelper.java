@@ -191,14 +191,7 @@ public class WSClientHelper {
                      @Override
                      public void accept(Object o) throws Exception {
                        if (o instanceof ResponseBody) {
-                         try {
-                           writeFile(((ResponseBody) o), downLoadFile, callBack);
-                         } catch (Exception e) {
-                           e.printStackTrace();
-                           callBack.onFail(e.getLocalizedMessage());
-                         } finally {
-                           ((ResponseBody) o).close();
-                         }
+                         writeFile(((ResponseBody) o), downLoadFile, callBack);
                        }
                      }
                    },
@@ -212,43 +205,54 @@ public class WSClientHelper {
 
 
   private static void writeFile(ResponseBody response, File downLoadFile, @NonNull WSCallBack callBack) {
-    DownLoadEntity downLoadEntity = new DownLoadEntity();
-    downLoadEntity.setPro(0);
-    downLoadEntity.setDownLoadFile(downLoadFile);
+   new Thread(){
+     @Override
+     public void run() {
+       int oldPro=0;
+       DownLoadEntity downLoadEntity = new DownLoadEntity();
+       downLoadEntity.setPro(0);
+       downLoadEntity.setDownLoadFile(downLoadFile);
+       InputStream is = null;
+       FileOutputStream fos = null;
+       is = response.byteStream();
+       try {
+         fos = new FileOutputStream(downLoadFile);
+         byte[] bytes = new byte[1024];
+         int len = 0;
+         //获取下载的文件的大小
+         long fileSize = response.contentLength();
+         downLoadEntity.setSize(fileSize);
+         long sum = 0;
+         int porSize = 0;
+         while ((len = is.read(bytes)) != -1) {
+           fos.write(bytes);
+           sum += len;
+           porSize = (int) ((sum * 1.0f / fileSize) * 100);
+           if (porSize-oldPro>0){
+             downLoadEntity.setPro(porSize);
+             callBack.onSuccess(downLoadEntity);
+             oldPro = porSize;
+           }
+         }
+       } catch (Exception e) {
+         e.printStackTrace();
+       } finally {
+         try {
+           if (is != null) {
+             is.close();
+           }
+           if (fos != null) {
+             fos.close();
+           }
+         } catch (IOException e) {
+           e.printStackTrace();
+         }
+       }
 
-    InputStream is = null;
-    FileOutputStream fos = null;
-    is = response.byteStream();
-    try {
-      fos = new FileOutputStream(downLoadFile);
-      byte[] bytes = new byte[1024];
-      int len = 0;
-      //获取下载的文件的大小
-      long fileSize = response.contentLength();
-      downLoadEntity.setSize(fileSize);
-      long sum = 0;
-      int porSize = 0;
-      while ((len = is.read(bytes)) != -1) {
-        fos.write(bytes);
-        sum += len;
-        porSize = (int) ((sum * 1.0f / fileSize) * 100);
-        downLoadEntity.setPro(porSize);
-        callBack.onSuccess(downLoadEntity);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if (is != null) {
-          is.close();
-        }
-        if (fos != null) {
-          fos.close();
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+
+     }
+   }.start();
+
   }
 
 

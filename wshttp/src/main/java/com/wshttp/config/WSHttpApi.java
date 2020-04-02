@@ -16,6 +16,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 
@@ -53,7 +54,7 @@ public interface WSHttpApi {
             @Url String url,
             @Body List<MultipartBody.Part> parts);
 
-
+    @Streaming
     @GET
     Observable<ResponseBody> downLoadFile(@Url String url);
 
