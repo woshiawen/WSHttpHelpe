@@ -63,7 +63,7 @@ public class WSHttpClient {
                 .callTimeout(requestConfig.onCallTimeOutNum(), TimeUnit.MILLISECONDS)    //调用超时
                 .readTimeout(requestConfig.onReadTimeOutNum(), TimeUnit.MILLISECONDS)
                 .addInterceptor(requestConfig.onTokenInterceptor())
-                .addInterceptor(requestConfig.onInterceptor())
+//                .addInterceptor(requestConfig.onInterceptor())
 //        .addNetworkInterceptor(requestConfig.onNetWorkInterceptor())
                 .cookieJar(requestConfig.onCookieJar())
                 .proxy(Proxy.NO_PROXY)

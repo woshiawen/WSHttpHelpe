@@ -215,7 +215,8 @@ public class WSClientHelper {
        InputStream is = null;
        FileOutputStream fos = null;
        is = response.byteStream();
-       try {
+
+         try {
          fos = new FileOutputStream(downLoadFile);
          byte[] bytes = new byte[1024];
          int len = 0;
@@ -225,27 +226,29 @@ public class WSClientHelper {
          long sum = 0;
          int porSize = 0;
          while ((len = is.read(bytes)) != -1) {
-           fos.write(bytes);
+           fos.write(bytes,0,len);
            sum += len;
            porSize = (int) ((sum * 1.0f / fileSize) * 100);
-           if (porSize-oldPro>0){
-             downLoadEntity.setPro(porSize);
-             callBack.onSuccess(downLoadEntity);
-             oldPro = porSize;
-           }
          }
-           fos.flush();
-
+             fos.flush();
+             if (porSize-oldPro>0){
+                 downLoadEntity.setPro(porSize);
+                 callBack.onSuccess(downLoadEntity);
+                 oldPro = porSize;
+             }
        } catch (Exception e) {
          e.printStackTrace();
        } finally {
          try {
+             if (fos != null) {
+                 fos.close();
+             }
            if (is != null) {
              is.close();
            }
-           if (fos != null) {
-             fos.close();
-           }
+             if (response != null) {
+                 response.close();
+             }
          } catch (IOException e) {
            e.printStackTrace();
          }
