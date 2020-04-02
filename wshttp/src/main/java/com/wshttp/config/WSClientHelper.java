@@ -234,6 +234,8 @@ public class WSClientHelper {
              oldPro = porSize;
            }
          }
+           fos.flush();
+
        } catch (Exception e) {
          e.printStackTrace();
        } finally {
