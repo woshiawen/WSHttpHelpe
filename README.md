@@ -12,7 +12,7 @@ OkHttp 和Rertorfit2.0 + 工厂模式等设计的一个便捷网络库帮助类,
 2.添加以下依赖
 
     //本项目依赖
-    implementation 'com.github.woshiawen:WSHttpHelpe:v1.0'
+    implementation 'com.github.woshiawen:WSHttpHelpe:v1.0.6'
 
 
     //以下为选择实现 如果你的项目里已经存在了 则无需实现  如果不存在则实现
