@@ -148,9 +148,7 @@ public class MainActivity extends WSActivity {
                @Override
                public void run() {
                    commandET.setText("成功:   " + s.getPro() + "/100 \n------------------------------\n\n");
-
                    if (s.getPro()==100){
-
                        AppUtils.installApp(s.getDownLoadFile());
                    }
                }

@@ -1,10 +1,7 @@
 package com.wshttp.config;
 
 
-import android.os.Environment;
-import android.os.Message;
 import android.util.ArrayMap;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -21,11 +18,9 @@ import java.io.InputStream;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
-import rx.functions.Action1;
 
 
 /**
@@ -239,6 +234,7 @@ public class WSClientHelper {
                     }
                     fos.flush();
                     downLoadEntity.setPro(porSize);
+
                     callBack.onSuccess(downLoadEntity);
                 } catch (Exception e) {
                     e.printStackTrace();

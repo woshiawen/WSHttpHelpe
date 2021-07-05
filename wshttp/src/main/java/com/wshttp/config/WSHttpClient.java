@@ -1,6 +1,12 @@
 package com.wshttp.config;
 
+import java.io.IOException;
 import java.net.Proxy;
+import java.net.ProxySelector;
+import java.net.SocketAddress;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.CacheControl;
@@ -67,6 +73,17 @@ public class WSHttpClient {
 //        .addNetworkInterceptor(requestConfig.onNetWorkInterceptor())
                 .cookieJar(requestConfig.onCookieJar())
                 .proxy(Proxy.NO_PROXY)
+                .proxySelector(new ProxySelector() {
+                    @Override
+                    public List<Proxy> select(URI uri) {
+                        return Collections.singletonList(Proxy.NO_PROXY);
+                    }
+
+                    @Override
+                    public void connectFailed(URI uri, SocketAddress sa, IOException ioe) {
+
+                    }
+                })
 //        .cache(requestConfig.onCache())
                 .build();
 
